@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>Galaxy FHIRwearks</title>
+    <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.css">
+    <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="lib/tau/wearable/theme/default/tau.circle.css">
+    <link rel="stylesheet" href="lib/tau-custom.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="ui-page ui-page-active" id="main">
+	   <header class="ui-header">
+	      <h2 class="ui-title">FHIRwearks</h2>
+	   </header>
+	   <div class="ui-content">
+	      <ul class="ui-listview">
+	         <li class="li-has-thumb-left">
+	             <a href="#send" id="sendbutton">
+	                .  Send Data
+	               <div class="img-icon send-icon ui-li-thumb-left"></div>
+	            </a>
+	         </li>
+	         
+	         <li class="li-has-thumb-left">
+	          <a href="#settings">
+	                Settings
+	               <div class="img-icon settings-icon ui-li-thumb-left"></div>
+	           	</a>
+	         </li>
+	      </ul>
+	   </div>
+	</div>
+	
+	<div id="power-saving-popup" class="ui-popup">
+            <div class="ui-popup-content">
+                Save battery by:<br />- Using a greyscale Home screen.<br />- Disabling all functions
+                except calls/ messages/ notifications.<br />- Disabling Wi-Fi.<br />- Limiting maximum performance.
+            </div>
+            <div class="ui-popup-footer ui-side-button ui-grid-col-2">
+                <a href="#" class="ui-btn btn-cancel" data-rel="back">Cancel</a>
+                <a href="#" class="ui-btn btn-apply" data-rel="back">OK</a>
+            </div>
+    </div>
+    
+	<div class="ui-page" id="send">
+         <header class="ui-header">
+            <h2 class="ui-title">Send:</h2>
+         </header>
+         <div id="sendContent" class="ui-content">
+            <p id = "mode">Your send mode is: manual</p>
+            Here's what we'd send to FHIR:
+            <p id = "patient"> Please go to Settings: User info</p>
+            <p id = "time"> Timestamp: N/A</p>
+            <p id = "heartrate">Heartrate: N/A</p>
+            <a href="#sendsuccess" id="sendtofhir">
+            <button type="button">Send To FHIR</button></a>
+         </div>
+         
+    </div>
+
+   	<div class="ui-page" id="settings">
+         <header class="ui-header">
+            <h2 class="ui-title">Settings</h2>
+         </header>
+         <div id="sendSettings" class="ui-content">
+	      <ul class="ui-listview">
+	         <li class="li-has-thumb-left">
+	            <a href="#sendsettings">
+	                Send Settings
+	            </a>
+	         </li>
+	         
+	         <li class="li-has-thumb-left">
+	            <a href="#user">
+	                User Info
+	           	</a>
+	         </li>
+	         
+	         <li class="li-has-thumb-left">
+	            <a href="#future">
+	                App Info
+	           	</a>
+	         </li>
+         </div>
+      </div> 
+       
+     <div class="ui-page" id="sendsettings">
+     <header class="ui-header">
+            <h2 class="ui-title">Send Mode:</h2>
+      </header>
+       <div class="ui-content">
+      <ul class="ui-listview">
+      	<li class="li-has-radio">
+		      <label>
+		         Manual
+		         <input id = "sendmanual" type="radio" name="sound-mode-radio" value="manual"/>
+		      </label>
+	     </li>
+	     <li class="li-has-radio">
+		      <label>
+		         Auto: hourly
+		         <input id = "sendhourly" type="radio" name="sound-mode-radio" value="hourly"/>
+		      </label>
+         </li>
+	     <li class="li-has-radio">
+		      <label>
+		         Auto: daily
+		         <input id = "senddaily" type="radio" name="sound-mode-radio" value="daily"/>
+		      </label>
+		 </li>
+	     <li class="li-has-radio">
+		      <label>
+		         Auto: weekly
+		         <input id = "sendweekly" type="radio" name="sound-mode-radio" value="weekly"/>
+		      </label>
+   		</li>
+   		</ul>
+     </div>
+     </div>
+     
+     <div class="ui-page" id="sendsuccess">
+     <header class="ui-header">
+            <h2 class="ui-title">Sending:</h2>
+         </header>
+         <div id="IDcontent" class="ui-content">
+         <p id="patientName">Data: N/A</p>
+         <p id="patID">ID: N/A</p>
+         <a href="#main">
+         <button>Home</button></a>
+         </div>
+     </div>
+     
+     <div class="ui-page" id="sendfail">
+     <header class="ui-header">
+            <h2 class="ui-title">Failed to send:</h2>
+         </header>
+         <div class="ui-content">
+         Make sure you don't hold<br>
+         the watch away from<br>
+         your wrist as you<br>
+         use this app.<br>
+         <br>
+         Please also check<br>
+         that the User Info<br>
+         in Settings matches<br>
+         the names and birth date<br>
+         you registered with<br>
+         your local health<br>
+         service.
+         </div>
+     </div>
+     
+     <div class="ui-page" id="user">
+         <header class="ui-header">
+            <h2 class="ui-title">User Info</h2>
+         </header>
+         <div id="User-Info" class="ui-content" style="text-align:center;align-content:center">
+         	<label for="fname">First Name</label>
+         	<br><input type="text" placeholder="first name" id="fname" size=5 style="text-transform:capitalize;">
+	        <br><label for="lname">Last Name</label>
+	        <br><input type="text" placeholder="last name" id="lname" size=5 style="text-transform:capitalize;">
+	        <br><label for="dob">Date of Birth</label>
+	        <br><input type="date" id="dob" style="width:160px;">
+			<br><button type="submit" id="submission">Submit</button>
+	       	<br>
+         </div>
+      </div>
+     
+     <div class="ui-page" id="future">
+     <header class="ui-header">
+            <h2 class="ui-title">App Info</h2>
+      </header>
+	      <div id="app info" class="ui-content">>
+	      <b>How It Works</b><br>
+	      Currently, the app measures the user's<br>
+	      heartrate and communicates it to<br>
+	      FHIR: it records it as a vital<br>
+	      sign observation.<br>
+	      <br>>
+	      <b>Future Features</b><br>
+	      	As the Samsung Health<br>
+	      	Kit technology improves,<br>
+	      	we'd like to add the<br>
+	        ability to measure Blood<br>
+	      	Pressure and send them<br>
+	      	to FHIR.<br>
+	      	<br>
+	      	You can already measure<br>
+	      	your blood pressure with<br>
+	      	the Samsung Watch Actives<br>
+	      	and a Samsung Galaxy phone<br>
+	      	past S9 with the MyBP app<br>
+	      	if you are above 18 and<br>
+	      	would like to participate<br>
+	      	in the study.<br>
+	      	<br>
+	      	We'd also like to add a <br>
+	      	companion Android App<br>
+	      	to turn off automatic<br>
+	      	data sending if a user<br>
+	      	loses their watch<br>
+	      	(i.e. left it at home,<br>
+	      	lent their watch out,<br>
+	      	their watch was stolen...)<br>
+	      </div>
+     </div>
+	<script src="js/tauConfig.js"></script>
+	<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/tau/wearable/js/tau.js"></script>
+    <script type="text/javascript" src="lib/circle-helper.js"></script>
+    <script src="js/core/core.js" data-main="js/app.js"></script>
+</body>
+</html>

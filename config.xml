@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/FHIRwearks" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="GRS8BOTuSF.FHIRwearks" package="GRS8BOTuSF" required_version="4.0"/>
+    <author email="alex.tcherdakoff.18@ucl.ac.uk">Alex Tcherdakoff</author>
+    <content src="index.html"/>
+    <description>A Samsung Wear app using FHIRFLI: A component that converts known health &amp; lifestyle data (ex. Google Fit, Health Kit) to FHIR format.
+Useful for rehabilitation and physical therapy patients, for example</description>
+    <feature name="http://tizen.org/feature/humanactivitymonitor"/>
+    <feature name="http://tizen.org/feature/sensor.heart_rate_monitor"/>
+    <feature name="http://tizen.org/feature/web.service"/>
+    <feature name="http://tizen.org/feature/screen.size.normal"/>
+    <icon src="icon.png"/>
+    <name>FHIRwearks</name>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+    <tizen:privilege name="http://tizen.org/privilege/healthinfo"/>
+    <tizen:profile name="wearable"/>
+    <tizen:setting background-support="disable" encryption="disable" hwkey-event="enable"/>
+</widget>
