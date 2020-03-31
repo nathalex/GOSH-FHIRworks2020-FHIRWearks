@@ -9,7 +9,7 @@ import requests
 
 app = Flask(__name__)
 
-#using Dao Hang Liu's FHIR composite: assuming it gets updated regularly, it should contain all the patients on FHIR: https://fhir.compositegrid.com:5001/api/Patient
+#using Dao Heng Liu's FHIR composite: assuming it gets updated regularly, it should contain all the patients on FHIR: https://fhir.compositegrid.com:5001/api/Patient
 fhir = FHIR("https://fhir.compositegrid.com:5001/api/Patient", verify_ssl = False)
 patients = fhir.get_all_patients()
 logs = ""
@@ -54,19 +54,24 @@ headersFHIRPost = make_auth_headerFHIRPost(get_access_token())
 
 @app.route("/newObservation",methods=["POST"])
 def newObservation():
-    date = request.args.get("date")
-    heartrate = request.args.get("heartrate")
-    patientID = request.args.get("patientID")
+    print(request.data)
 
-    observeJSON = "{\
-        \"token\": \"" + get_access_token() + "\",\
-        \"fhir_url\": \"https://gosh-fhir-synth.azurehealthcareapis.com\",\
-        \"date\": \"" + date + "\",\
-        \"heartrate\": " + heartrate + ",\
-        \"patient_id\": \"" + patientID + "\",\
-        \"type\": \"heartrate\"\
-    }"                                                                                                                                                 
-                                                                                                                                                    
+
+    date = request.json["date"]
+    heartrate = request.json["heartrate"]
+    patientID = request.json["patientid"]
+
+    observeJSON = '{\
+        "token": "' + get_access_token() + '",\
+        "fhir_url": "https://gosh-fhir-synth.azurehealthcareapis.com",\
+        "date": "' + str(date) + '",\
+        "heartrate": ' + str(heartrate) + ',\
+        "patient_id": "' + str(patientID) + '",\
+        "type": "heartrate"\
+    }'                            
+
+    #newFHIRJSON = "{'resourceType': 'Observation', 'status': 'final', 'code': {'text': 'heartrate', 'coding': [{'code': '8867-4', 'system': 'http://loinc.org', 'display': 'Heart rate'}]}, 'subject': {'reference': 'Patient/8f789d0b-3145-4cf2-8504-13159edaa747'}, 'effectivePeriod': {'start': '2020-03-31T16:04:07', 'end': '2020-03-31T16:04:07'}, 'component': [], 'valueQuantity': {'value': 20.0, 'unit': 'BPM'}}"
+
     trial = requests.request("POST", "https://json-fhir-tool.azurewebsites.net/api/json-fhir-tool", data=observeJSON, headers=headersPost)                   
     FHIRObservation = str(trial.json())                                                                                                                
     print(FHIRObservation)                                                                                                                             

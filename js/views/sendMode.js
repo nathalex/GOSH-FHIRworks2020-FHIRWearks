@@ -85,6 +85,7 @@ define({
 
             item = item.querySelector('input');
             currentValue = item.getAttribute('value');
+            setReminders();
             history.back();
         }
 
@@ -108,6 +109,169 @@ define({
         function onPageBeforeShow() {
             pageHelper.resetScroll(page);
             page.querySelector('[value="' + currentValue + '"]').checked = true;
+        }
+        
+        /**
+         * Checks and sets user reminders on click
+         *
+         * @memberof views/sendMode
+         * @private
+         */
+        function setReminders(){
+        	if (document.getElementById("sendhourly").checked){
+    			//console.error("I get here");
+    			hourlyReminders();}
+    		else if (document.getElementById("senddaily").checked){
+    			dailyReminders();}
+    		else if (document.getElementById("sendweekly").checked){
+    			weeklyReminders();}
+    		else{noReminders();}
+        }
+        
+        /**
+         * Reminds user to post hourly.
+         *
+         * @memberof views/sendMode
+         * @private
+         */
+        function hourlyReminders(){
+        	var appid = tizen.application.getCurrentApplication().appInfo.id;
+        	console.error(appid);
+
+        	var appControl = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/view", /*"index.html"*/ null, null, null, null, "SINGLE");
+        	tizen.application.launchAppControl(appControl, appid /*null*/,
+        			function(){console.error("launch appControl succeeded");}, 
+        			function(e){console.error("launch appControl failed. Reason: " + e.name);}, null );
+    	
+    	
+        	//var reqAppControl = tizen.application.getCurrentApplication().getRequestedAppControl();
+        	tizen.alarm.removeAll();
+        	
+        	var i;
+        	
+        	var normal =  "This is your hourly reminder to log your heartrate";
+        	var last = "This is your LAST hourly reminder to log your heartrate. If you'd like more reminders, please open \"Settings/Send Settings\" in the App and tick \"Auto: hourly\"";
+        
+        	for (i = 0; i < 12; i++){
+        		
+        		var date = new Date();
+        		date.setSeconds(date.getSeconds() + 20);
+        		date.setHours(date.getHours() + i);
+        		console.error("time is: " + date);
+        		
+        		if (i === 11){
+        			normal = last;
+    		}
+	        	var alarm = new tizen.AlarmAbsolute(date);
+	        	var notificationGroupDict =
+	        	{
+	        	  content: normal,
+	        	  actions: {
+	        		  vibration: true,
+	        		  appControl: appControl},
+	        	  thumbnails: {thumbnailIconPath: "../../icon.png"},
+	        	  //appId : appid
+	        	};
+	
+	        	var notification = new tizen.UserNotification("SIMPLE", "FHIRWearks Hourly Reminder", notificationGroupDict);
+	        	tizen.alarm.addAlarmNotification(alarm, notification);
+	        	
+	        	console.error("Alarm notification added with id: " + alarm.id);
+    		}
+        }
+        
+        /**
+         * Reminds user to post daily.
+         *
+         * @memberof views/sendMode
+         * @private
+         */
+        function dailyReminders(){
+        	tizen.alarm.removeAll();
+        	
+        	var i;
+        	
+        	var normal = "This is your daily reminder to log your heartrate";
+        	var last = "This is your LAST daily reminder to log your heartrate. If you'd like more reminders, please open \"Settings/Send Settings\" in the App and tick \"Auto: daily\"";
+        	
+        	for (i = 0; i < 24; i++){
+        		
+        		
+        		var date = new Date();
+        		date.setSeconds(date.getSeconds() + 20);
+        		date.setDate(date.getDate() + i);
+        		console.error("time is: " + date);
+        		
+        		
+        		if (i === 23){
+        			normal = last;
+        		}
+	        	var alarm = new tizen.AlarmAbsolute(date);
+	        	var notificationGroupDict =
+	        	{
+	        	  content: normal,
+	        	  actions: {vibration: true},
+	        	  thumbnails: {thumbnailIconPath: "../../icon.png"}
+	        	};
+	
+	        	var notification = new tizen.UserNotification("SIMPLE", "FHIRWearks Daily Reminder", notificationGroupDict);
+	
+	        	tizen.alarm.addAlarmNotification(alarm, notification);
+	        	console.error("Alarm notification added with id: " + alarm.id);
+        	}
+        }
+        
+        /**
+         * Reminds user to post weekly.
+         *
+         * @memberof views/send
+         * @private
+         */
+        function weeklyReminders(){
+        	tizen.alarm.removeAll();
+        	
+        	var i;
+        	
+        	var normal = "This is your weekly reminder to log your heartrate";
+        	var last = "This is your LAST weekly reminder to log your heartrate. If you'd like more reminders, please open \"Settings/Send Settings\" in the App and tick \"Auto: hourly\"";
+        	
+        	for (i = 0; i < 24; i++){
+        		
+        		
+        		var date = new Date();
+        		date.setSeconds(date.getSeconds() + 20);
+        		date.setDate(date.getDate() + (7*i));
+        		console.error("time is: " + date);
+        		
+        		
+        		if (i === 23){
+        			normal = last;
+        		}
+        		
+	        	var alarm = new tizen.AlarmAbsolute(date);
+	        	var notificationGroupDict =
+	        	{
+	        	  content: normal,
+	        	  actions: {vibration: true},
+	        	  thumbnails: {thumbnailIconPath: "../../icon.png"}
+	        	};
+	
+	        	var notification = new tizen.UserNotification("SIMPLE", "FHIRWearks Weekly Reminder", notificationGroupDict);
+	
+	        	tizen.alarm.addAlarmNotification(alarm, notification);
+	        	console.error("Alarm notification added with id: " + alarm.id);
+        	}
+        }
+        
+        /**
+         * Removes user post reminders.
+         *
+         * @memberof views/sendMode
+         * @private
+         */
+        function noReminders(){
+        	tizen.alarm.removeAll();
+        	console.error("Removed all registered alarms in the storage.");
         }
 
         /**

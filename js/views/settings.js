@@ -5,21 +5,30 @@
  * Settings module.
  *
  * @module views/settings
- * @requires {@link helpers/page}
  * @requires {@link views/sendMode}
  * @requires {@link views/userInfo} 
+ * @requires {@link helpers/page}
  * @namespace views/settings
  */
 define({
     name: 'views/settings',
     requires: [
-        'helpers/page',
         'views/sendMode',
-        'views/userInfo'
+        'views/userInfo',
+        'helpers/page'
     ],
-    def: function settings(pageHelper) {
+    def: function settings(req) {
         'use strict';
 
+        /**
+         * Page helper module instance.
+         *
+         * @memberof views/settings
+         * @private
+         * @type {Module}
+         */
+        var pageHelper = req.helpers.page,
+        
         /**
          * Page element.
          *
@@ -27,7 +36,7 @@ define({
          * @private
          * @type {HTMLElement}
          */
-        var page = null;
+        	page = null;
 
         /**
          * Handles pagebeforeshow event page element.

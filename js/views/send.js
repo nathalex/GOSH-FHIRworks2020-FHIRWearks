@@ -176,7 +176,8 @@ define({
 	            paraMode.setAttribute("id", "mode");
 	            var elementMode = document.getElementById("sendContent");
 	            var childMode = document.getElementById("mode");
-	            elementMode.replaceChild(paraMode, childMode);     		
+	            elementMode.replaceChild(paraMode, childMode);   
+	            
 	   
 	            counter++;
 	            if (counter > 10) {
@@ -275,19 +276,40 @@ define({
          * @param {string} patientID
          */
         function postObservation(date, heartrate, patientID){
-        	/*var settings = {
-        			  "url": "https://fhirwearks.azurewebsites.net/newObservation?date=" + date + "&heartrate=" + heartrate + "&patientID=" + patientID,
-        			  "method": "POST",
-        			  "async": false,
-        			  "timeout": 0
-        			};
-        	//call it?
-        	$.ajax(settings).done(function (response) {
-        			  console.error(response);
-        			});*/
-
-          	$.post("https://fhirwearks.azurewebsites.net/newObservation", {"date":date, "heartrate":heartrate, "patientID":patientID});
-        	        	
+        	
+        	var postData = {"date":date, "heartrate":heartrate, "patientid":patientID};
+          		
+          	$.ajax({
+          		type: "POST",
+          		url: "https://fhirwearks.azurewebsites.net/newObservation", 
+          		data: JSON.stringify(postData),
+          		contentType: "application/json; charset=utf-8",
+          	    dataType: "Text",
+	          	cache: false,
+	            success: function(data, status){
+	      			//display post success
+		            var paraPost = document.createElement("p");//creates new paragraph
+		            var nodePost = document.createTextNode("Post: success");
+		            paraPost.appendChild(nodePost);
+		            paraPost.setAttribute("id", "posted");
+		            var elementPost = document.getElementById("IDcontent");
+		            var childPost = document.getElementById("posted");
+		            elementPost.replaceChild(paraPost, childPost);
+		            console.error("Data: " + data + "\nStatus: " + status);
+	      		}
+          	})
+      		.fail(function(xhr, status, error){
+          		var err = xhr.status + ': ' + xhr.statusText;
+          		console.error("post failed: " + err);
+          		 //display post fail
+	            var paraPost = document.createElement("p");//creates new paragraph
+	            var nodePost = document.createTextNode("Post: failed");
+	            paraPost.appendChild(nodePost);
+	            paraPost.setAttribute("id", "posted");
+	            var elementPost = document.getElementById("IDcontent");
+	            var childPost = document.getElementById("posted");
+	            elementPost.replaceChild(paraPost, childPost);
+	            });        	
         }
         
         /**
@@ -316,9 +338,9 @@ define({
 	            
 	            //send to fhir
 	            postObservation(nowStr, heartrate, patID);
-       
         }
         
+             
         /**
          * Registers event listeners.
          *
