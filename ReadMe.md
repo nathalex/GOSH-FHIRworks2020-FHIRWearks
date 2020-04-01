@@ -1,16 +1,16 @@
-#FHIRWearks:
+# FHIRWearks:
 # GOSH-FHIRworks 2020 hackathon submission
 
 ## Alex Tcherdakoff
 
 ## Contents
 
-1 Summary and Architecture 
-2 Features 
-3 Demos 
-4 Installation Guide 
-5 Future Plans 
-6 Acknowledgements 
+# 1 Summary and Architecture 
+# 2 Features 
+# 3 Demos 
+# 4 Installation Guide 
+# 5 Future Plans 
+# 6 Acknowledgements 
 
 ## 1 Summary and Architecture
 
