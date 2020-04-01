@@ -136,15 +136,9 @@ define({
          */
         function hourlyReminders(){
         	var appid = tizen.application.getCurrentApplication().appInfo.id;
-        	console.error(appid);
+        	
+        	var appControl = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/view", null, null, null, null, "SINGLE");
 
-        	var appControl = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/view", /*"index.html"*/ null, null, null, null, "SINGLE");
-        	tizen.application.launchAppControl(appControl, appid /*null*/,
-        			function(){console.error("launch appControl succeeded");}, 
-        			function(e){console.error("launch appControl failed. Reason: " + e.name);}, null );
-    	
-    	
-        	//var reqAppControl = tizen.application.getCurrentApplication().getRequestedAppControl();
         	tizen.alarm.removeAll();
         	
         	var i;
@@ -152,14 +146,14 @@ define({
         	var normal =  "This is your hourly reminder to log your heartrate";
         	var last = "This is your LAST hourly reminder to log your heartrate. If you'd like more reminders, please open \"Settings/Send Settings\" in the App and tick \"Auto: hourly\"";
         
-        	for (i = 0; i < 12; i++){
+        	for (i = 0; i < 24; i++){
         		
         		var date = new Date();
         		date.setSeconds(date.getSeconds() + 20);
         		date.setHours(date.getHours() + i);
         		console.error("time is: " + date);
         		
-        		if (i === 11){
+        		if (i === 23){
         			normal = last;
     		}
 	        	var alarm = new tizen.AlarmAbsolute(date);
@@ -168,9 +162,9 @@ define({
 	        	  content: normal,
 	        	  actions: {
 	        		  vibration: true,
-	        		  appControl: appControl},
-	        	  thumbnails: {thumbnailIconPath: "../../icon.png"},
-	        	  //appId : appid
+	        		  appControl: appControl,
+	        		  appId: appid},
+	        	  thumbnails: {thumbnailIconPath: "../../icon.png"}
 	        	};
 	
 	        	var notification = new tizen.UserNotification("SIMPLE", "FHIRWearks Hourly Reminder", notificationGroupDict);
@@ -187,6 +181,11 @@ define({
          * @private
          */
         function dailyReminders(){
+        	var appid = tizen.application.getCurrentApplication().appInfo.id;
+        	
+        	var appControl = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/view", null, null, null, null, "SINGLE");
+
+        	
         	tizen.alarm.removeAll();
         	
         	var i;
@@ -210,7 +209,10 @@ define({
 	        	var notificationGroupDict =
 	        	{
 	        	  content: normal,
-	        	  actions: {vibration: true},
+	        	  actions: {
+	        		  vibration: true,
+	        		  appControl: appControl,
+	        		  appId: appid},
 	        	  thumbnails: {thumbnailIconPath: "../../icon.png"}
 	        	};
 	
@@ -228,6 +230,11 @@ define({
          * @private
          */
         function weeklyReminders(){
+        	var appid = tizen.application.getCurrentApplication().appInfo.id;
+        	
+        	var appControl = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/view", null, null, null, null, "SINGLE");
+
+        	
         	tizen.alarm.removeAll();
         	
         	var i;
@@ -252,7 +259,10 @@ define({
 	        	var notificationGroupDict =
 	        	{
 	        	  content: normal,
-	        	  actions: {vibration: true},
+	        	  actions: {
+	        		  vibration: true,
+	        		  appControl: appControl,
+	        		  appId: appid},
 	        	  thumbnails: {thumbnailIconPath: "../../icon.png"}
 	        	};
 	
