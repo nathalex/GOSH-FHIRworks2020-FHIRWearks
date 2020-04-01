@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.3.23)  31 MAR 2020 20:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.3.23)  1 APR 2020 23:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -236,32 +236,42 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write4
 \openout4 = `document.toc'.
 
- [1
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--36
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--36
+
+ []
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 30--36
+Underfull \hbox (badness 10000) in paragraph at lines 44--50
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--36
+Underfull \hbox (badness 10000) in paragraph at lines 44--50
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 40.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 54.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 40.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 54.
  (./document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 40.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 40.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 54.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 54.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 139971175C44EFE718187B4E9D0E8D9B;293.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 40.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 54.
  )
 (\end occurred inside a group at level 2)
 
-### simple group (level 2) entered at line 38 ({)
-### simple group (level 1) entered at line 38 ({)
+### simple group (level 2) entered at line 52 ({)
+### simple group (level 1) entered at line 52 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
  4692 strings out of 494923
@@ -270,14 +280,14 @@ Here is how much of TeX's memory you used:
  8014 multiletter control sequences out of 15000+600000
  7756 words of font info for 28 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 28i,6n,32p,354b,359s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,6n,32p,319b,359s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on document.pdf (2 pages, 92436 bytes).
+Output written on document.pdf (2 pages, 95522 bytes).
 PDF statistics:
  75 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
