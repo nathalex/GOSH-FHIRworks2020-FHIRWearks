@@ -55,7 +55,8 @@ https://youtu.be/dFxG_mPa3Q
 
 ## 4 Installation Guide
 
-You can download Tizen and open the workspace to run the app in the emulator, or if you have a Samsung Watch,
+You can download the app from the Galaxy store at this link: https://galaxystore.samsung.com/geardetail/GRS8BOTuSF. 
+Alternatively, you can download Tizen and open the workspace to run the app in the emulator, or if you have a Samsung Watch,
 simply switch the device to debug mode and make sure it is connected to the same WiFi network as your computer.
 You may have to make sure you have the correct certificates to launch (use the certificate generator to create one
 if not).
